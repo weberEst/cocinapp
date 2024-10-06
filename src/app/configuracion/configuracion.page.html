@@ -1,0 +1,51 @@
+<ion-app>
+  <ion-header >
+    <ion-toolbar color="primary">
+      <ion-title>Configuración</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/inicio"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+
+    <button id="button" (click) = "playA()" [routerLink]="['/acerca-de']">
+      <ion-card >
+      <ion-card-content>
+        <ion-title>Acerca de</ion-title>
+      </ion-card-content>
+    </ion-card>
+    </button>
+
+
+    <button id="button" (click) = "playB()" [routerLink]="['/privacidad']">
+      <ion-card >
+        <ion-card-content>
+          <ion-title>Privacidad</ion-title>
+        </ion-card-content>
+      </ion-card>
+    </button>
+
+    <button id="button" (click) = "playC()">
+      <ion-card >
+        <ion-card-content>
+          <ion-title>Cuenta</ion-title>
+        </ion-card-content>
+      </ion-card>
+    </button>
+
+    <button id="button" (click) = "playD()">
+      <ion-card >
+        <ion-card-content>
+          <ion-title>Notificaciones</ion-title>
+        </ion-card-content>
+      </ion-card>
+    </button>
+
+
+
+
+  </ion-content>
+
+</ion-app>

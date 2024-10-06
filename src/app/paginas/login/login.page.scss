@@ -1,0 +1,42 @@
+/* Estilos para el contenedor de inicio de sesión */
+#cajalogin {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+ion-card.form-card {
+  width: 100%;
+  max-width: 450px; /* Ancho máximo del card */
+  border-radius: 10px; /* Bordes redondeados del card */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra del card */
+}
+
+ion-item {
+  margin-bottom: 15px; /* Espaciado entre los ítems */
+}
+
+ion-input {
+  font-size: 16px;
+}
+
+ion-input::placeholder {
+  text-align: center; /* Centra el texto del placeholder */
+  color: #888; /* Color del placeholder, puedes ajustarlo si es necesario */
+}
+
+.submit-button {
+  margin-top: 20px; /* Espaciado superior */
+}
+
+/* Estilos para el botón de registro en el formulario */
+ion-button {
+  margin-top: 10px; /* Espaciado superior para los botones */
+}
+
+

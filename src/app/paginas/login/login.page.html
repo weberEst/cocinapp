@@ -1,0 +1,49 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Iniciar Sesión</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content id="cajalogin">
+    <ion-card>
+      <ion-card-content>
+        <ion-item class="input-item">
+          <ion-input type="text" label="Usuario" [(ngModel)]="usuario" name="usuario" placeholder="Ingrese el usuario"></ion-input>
+        </ion-item>
+
+        <ion-item class="input-item">
+          <ion-input type="password" label="Contraseña" [(ngModel)]="contrasenna" name="contraseña" placeholder="Escriba su contraseña"></ion-input>
+        </ion-item>
+
+        <ion-button id="botonlogin" expand="block" class="login-button" (click)="ingresar()">
+          INICIAR SESIÓN
+        </ion-button>
+        
+        <ion-button expand="block" color="secondary" (click)="navigateToRegister()">
+          CREAR CUENTA
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <p style="text-align: center;" font-family="Times New Roman">Puedes iniciar con</p>
+    <ion-card>
+      <ion-card-content>
+        <ion-button  expand="block" color="secondary" >
+          <img src="https://static.vecteezy.com/system/resources/previews/018/930/476/original/facebook-logo-facebook-icon-transparent-free-png.png"  alt="Icono" style="width:30px; height:30px;" margin="50%">
+        </ion-button>
+        
+        <ion-button  expand="block" color="white" >
+          <img src='https://img.icons8.com/?size=512&id=17949&format=png' alt="Icono" style="width:24px; height:24px;" margin="50%">
+        </ion-button>
+
+        <ion-button  expand="block" color="dark" >
+          <img src='https://pngimg.com/d/apple_logo_PNG19680.png' alt="Icono" style="width:16px; height:20px;" margin="50%">
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+
+</ion-app>

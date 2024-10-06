@@ -1,0 +1,65 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+ion-card-content p {
+  font-size: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  line-height: 22px;
+
+  color: #ffffffef;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+.background{
+  --background: linear-gradient(rgba(5, 7, 12, 0.10), rgba(5, 7, 12, 0.75)),
+                 url(https://th.bing.com/th/id/OIG4.VEy0DR8DbugOpMo.PWGl?w=1024&h=1024&rs=1&pid=ImgDetMain) 100% no-repeat;
+
+}
+
+.titulos{
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  margin-top: 100px;
+  text-align: center;
+  color: white;
+  font-size: 70px;
+}
+
+
+
+
+.blurred-card{
+  backdrop-filter: blur(5px); /* Ajusta el nivel de desenfoque */
+  background-color: rgba(255, 255, 255, 0.027); /* Ajusta la opacidad de fondo */
+  padding: 16px; /* Opcional: agrega padding para separar la card del borde */
+}
+
+
+.boton-empecemos{
+  margin-left: 5%;
+  margin-right: 5%;
+ 
+  margin-top: 40%;
+  backdrop-filter: blur(5px); /* Ajusta el nivel de desenfoque */
+  background-color: rgba(255, 255, 255, 0.027); /* Ajusta la opacidad de fondo */
+}
+
+.parrafo{
+  color: white;
+}

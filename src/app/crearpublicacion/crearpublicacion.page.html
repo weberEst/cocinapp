@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Publicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Sección del Título -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Título de la Publicación</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input label="Titulo "[(ngModel)]="titulo" name="titulo" placeholder="Ingresa el título de la publicación" required></ion-input>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sección de Imagen -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Imagen de la Publicación</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <input type="file" />
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sección de Ingredientes -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ingredientes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-textarea label="Ingredientes"[(ngModel)]="ingredientes" name="ingredientes" placeholder="Lista los ingredientes aquí" required></ion-textarea>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sección de Pasos -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Pasos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-textarea label="Pasos" [(ngModel)]="pasos" name="pasos" placeholder="Describe los pasos aquí" required></ion-textarea>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Opción de Video -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Video</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <input type="file" accept="video/*" />
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para guardar la publicación -->
+  <ion-button expand="full" color="primary" (click)="Publicar()">Crear Publicación</ion-button>
+</ion-content>
