@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PrivacidadPageRoutingModule } from './privacidad-routing.module';
 
 import { PrivacidadPage } from './privacidad.page';
+import { CompartirModule } from '../modulos/compartir/compartir.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PrivacidadPageRoutingModule
+    PrivacidadPageRoutingModule,
+    CompartirModule
   ],
   declarations: [PrivacidadPage]
 })

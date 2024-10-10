@@ -4,13 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CrearpublicacionPage } from './crearpublicacion.page';
 import { CrearpublicacionPageRoutingModule } from './crearpublicacion-routing.module';
+import { CompartirModule } from '../modulos/compartir/compartir.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearpublicacionPageRoutingModule
+    CrearpublicacionPageRoutingModule,
+    CompartirModule
   ],
   declarations: [CrearpublicacionPage]
 })

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
+import { CompartirModule } from 'src/app/modulos/compartir/compartir.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule
+    LoginPageRoutingModule,
+    CompartirModule
   ],
   declarations: [LoginPage]
 })

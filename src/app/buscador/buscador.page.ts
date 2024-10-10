@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/servicios/api.service'; // Asegúrate de que
 export class BuscadorPage implements OnInit {
   recetas: any[] = []; // Array para almacenar las recetas
   busqueda: string = ''; // Variable para almacenar el término de búsqueda
+  titulo : string = '';
 
   constructor(private router: Router, private apiService: ApiService) {}
 

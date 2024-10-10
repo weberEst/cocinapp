@@ -1,18 +1,12 @@
 <ion-app>
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Iniciar Sesión</ion-title>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home"></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <app-header [titulo] = "'Iniciar sesión'" [Direccion] = "'/home'"></app-header>
+
 
   <ion-content id="cajalogin">
     <ion-card>
       <ion-card-content>
         <ion-item class="input-item">
-          <ion-input type="text" label="Usuario" [(ngModel)]="usuario" name="usuario" placeholder="Ingrese el usuario"></ion-input>
+          <ion-input type="correo" label="Correo" [(ngModel)]="correo" name="correo" placeholder="Ingrese el correo"></ion-input>
         </ion-item>
 
         <ion-item class="input-item">

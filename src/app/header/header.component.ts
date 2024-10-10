@@ -9,6 +9,7 @@ export class HeaderComponent  implements OnInit {
 
   constructor() { }
   @Input() titulo:string=""
+  @Input() Direccion:string=""
   ngOnInit() {}
 
 }

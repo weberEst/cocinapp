@@ -5,13 +5,15 @@ import { IonicModule } from '@ionic/angular';
 import { BuscadorPageRoutingModule } from './buscador-routing.module';
 import { BuscadorPage } from './buscador.page';
 import { provideHttpClient } from '@angular/common/http'; 
+import { CompartirModule } from '../modulos/compartir/compartir.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BuscadorPageRoutingModule
+    BuscadorPageRoutingModule,
+    CompartirModule
   ],
   providers: [provideHttpClient()], 
   declarations: [BuscadorPage]

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "299278214418",
+    "project_id": "cocinapp-8d12d",
+    "storage_bucket": "cocinapp-8d12d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299278214418:android:016b2e2ba960d78c52ffcb",
+        "android_client_info": {
+          "package_name": "Cocin.app_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCwh1i9WlcpmGZG_1ski6nfdTZfNidDSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

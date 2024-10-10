@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
 
 
 @Component({
@@ -11,22 +12,14 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class LoginPage implements OnInit {
 
-  usuario: string = "";
+  correo: string = "";
   contrasenna: string = "";
 
-  constructor(public mensaje: ToastController, private route: Router, public alerta: AlertController, private storage : Storage) { }
+  constructor(public mensaje: ToastController, private route: Router, public alerta: AlertController, private storage : Storage, private loginfirebase:FirebaseLoginService) { }
 
   async Exito() {
     const toast = await this.mensaje.create({
       message: 'Inicio de sesión exitoso',
-      duration: 2000
-    });
-    toast.present();
-  }
-
-  async Error() {
-    const toast = await this.mensaje.create({
-      message: 'La contraseña debe tener mínimo 8 caractéres',
       duration: 2000
     });
     toast.present();
@@ -43,18 +36,20 @@ export class LoginPage implements OnInit {
   }
 
   ingresar() {
-    if (this.usuario === "" || this.contrasenna === "") {
+    if (this.correo === "" || this.contrasenna === "") {
       this.Alerta();
     }
-    else if(this.contrasenna.length<8){
-      this.Error();
-    }
     else {
-      this.storage.set("usuario", this.usuario)
-      this.storage.set("SessionId", true)
-      console.log("Inicio de sesión exitoso");
-      this.Exito();
-      this.route.navigate(["/inicio"]);
+      this.loginfirebase.login(this.correo,this.contrasenna).then(()=>{
+        this.storage.set("SessionId", true)
+        console.log("Inicio de sesión exitoso");
+        this.Exito();
+        this.route.navigate(["/inicio"])
+      }).catch(()=>{
+        console.log("Error al iniciar sesión")
+        this.Alerta();
+      })
+
     }
   }
 

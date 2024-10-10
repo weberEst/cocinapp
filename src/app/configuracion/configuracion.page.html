@@ -1,12 +1,5 @@
 <ion-app>
-  <ion-header >
-    <ion-toolbar color="primary">
-      <ion-title>Configuración</ion-title>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/inicio"></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+  <app-header [titulo] = "'Configuración'" [Direccion] = "'/inicio'"></app-header>
 
   <ion-content [fullscreen]="true">
 

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PerfilPageRoutingModule } from './perfil-routing.module';
 
 import { PerfilPage } from './perfil.page';
+import { CompartirModule } from '../modulos/compartir/compartir.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PerfilPageRoutingModule
+    PerfilPageRoutingModule,
+    CompartirModule
   ],
   declarations: [PerfilPage]
 })
