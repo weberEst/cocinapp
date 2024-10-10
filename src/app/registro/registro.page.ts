@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import {  ToastController } from '@ionic/angular';
+import { FirebaseLoginService } from '../servicios/firebase-login.service';
 
 @Component({
   selector: 'app-registro',
@@ -14,6 +14,7 @@ export class RegistroPage implements OnInit {
   correo : string ="";
 
   constructor(
+    private acces: FirebaseLoginService,
     private route: Router,
     private mensaje: ToastController,
   ) {}
@@ -46,7 +47,7 @@ export class RegistroPage implements OnInit {
     toast.present();
   }
 
-  Registrar() {
+  async Registrar() {
     if (this.usuario === "" || this.contrasenna === "" || this.correo==="") {
       this.Alerta();
     } 
@@ -55,6 +56,7 @@ export class RegistroPage implements OnInit {
       this.ContrasenaInvalida();
     }
     else {
+      await this.acces.crearUsuario(this.usuario, this.contrasenna, this.correo)
       console.log("Inicio de sesión exitoso");
       this.Exito();
       this.route.navigate(["/inicio"]);
