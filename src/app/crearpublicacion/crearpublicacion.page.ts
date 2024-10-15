@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+defineCustomElements(window);
 
 @Component({
   selector: 'app-crearpublicacion',
@@ -9,6 +12,16 @@ import { Router } from '@angular/router';
 
 })
 export class CrearpublicacionPage implements OnInit {
+
+  async tomarFoto(){
+    const imagen = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+      source : CameraSource.Camera,
+    })
+    console.log(imagen.webPath)
+  }
 
   titulo:string =""
   ingredientes :string =""

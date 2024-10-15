@@ -35,6 +35,16 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
+  async Error() {
+    const alert = await this.alerta.create({
+      header: 'Error',
+      message: 'Los datos ingresados son incorrectos',
+      buttons: ['Aceptar']
+    });
+  
+    await alert.present();
+  }
+
   ingresar() {
     if (this.correo === "" || this.contrasenna === "") {
       this.Alerta();
@@ -47,7 +57,7 @@ export class LoginPage implements OnInit {
         this.route.navigate(["/inicio"])
       }).catch(()=>{
         console.log("Error al iniciar sesión")
-        this.Alerta();
+        this.Error();
       })
 
     }
