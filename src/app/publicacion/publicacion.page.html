@@ -21,7 +21,11 @@
         </ion-card-header>
         <ion-card-content>
           <!-- Aquí agregarías los ingredientes dinámicos si los tienes disponibles -->
-          <p>{{ receta?.strIngredients || 'No se encontraron ingredientes' }}</p>
+                <ul>
+                  <li *ngFor="let ingredient of ingredientes">
+                    {{ ingredient }}
+                  </li>
+                </ul>
         </ion-card-content>
       </ion-card>
 

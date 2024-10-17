@@ -11,6 +11,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'; // Pa
 export class PublicacionPage implements OnInit {
   comentario: string = "";
   receta: any = {}; // Variable para almacenar la receta seleccionada
+  ingredientes: string[] =[];
 
   constructor(
     public mensaje: ToastController,
@@ -19,10 +20,12 @@ export class PublicacionPage implements OnInit {
     private sanitizer: DomSanitizer // Inyectamos el servicio para sanitizar URLs
   ) {}
 
+
   ngOnInit() {
     const recetaGuardada = localStorage.getItem('recetaSeleccionada');
     if (recetaGuardada) {
       this.receta = JSON.parse(recetaGuardada); // Recuperar la receta
+      this.mostrarIngredientes();
     }
   }
 
@@ -78,4 +81,19 @@ export class PublicacionPage implements OnInit {
       this.MensajeComentario();
     }
   }
+
+
+
+  mostrarIngredientes() {
+
+    this.ingredientes = [];    
+    let i= 1;
+
+    while (this.receta[`strIngredient${i}`]) {
+      const ingredient = this.receta[`strIngredient${i}`];
+      this.ingredientes.push(ingredient || 'No se encontraron ingredientes');
+      i++;    
+    }
+  }
+
 }
