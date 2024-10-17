@@ -31,6 +31,16 @@ export class RegistroPage implements OnInit {
     await alert.present();
   }
 
+  async CorreoExiste() {
+    const alert = await this.mensaje.create({
+      header: 'Error',
+      message: 'El correo ingresado ya existe',
+      duration: 2000
+    });
+  
+    await alert.present();
+  }
+
   async ContrasenaInvalida() {
     const toast = await this.mensaje.create({
       message: 'La contraseña debe ser mayor a 8 dígitos.',
@@ -56,10 +66,14 @@ export class RegistroPage implements OnInit {
       this.ContrasenaInvalida();
     }
     else {
-      await this.acces.crearUsuario(this.usuario, this.contrasenna, this.correo)
-      console.log("Inicio de sesión exitoso");
+      await this.acces.crearUsuario(this.usuario, this.contrasenna, this.correo).then(()=>{
+        console.log("Inicio de sesión exitoso");
       this.Exito();
       this.route.navigate(["/inicio"]);
+      }).catch(()=>{
+      console.log("Error al iniciar sesión")
+      this.CorreoExiste(); 
+      })
     }
   }
 }

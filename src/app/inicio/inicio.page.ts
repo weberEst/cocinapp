@@ -13,11 +13,18 @@ export class InicioPage {
   constructor(private router: Router, private storage : Storage) {
     this.obtenerUbicacion();
   }
-  usuario : String =""
+  correo = String; 
 
   navigateTo(path: string) {
     this.router.navigate([path]);
   }
+
+  async obtenerUsuario(){
+
+    
+
+  }
+
 
   async obtenerUbicacion(){
     const coordenadas = await Geolocation.getCurrentPosition();
@@ -29,6 +36,6 @@ export class InicioPage {
 
   async ngOnInit(){
     const storage = await this.storage.create()
-    this.usuario = await this.storage.get("usuario");
+    this.correo = await this.storage.get("correo");
   }
 }
