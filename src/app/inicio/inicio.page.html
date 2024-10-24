@@ -1,145 +1,135 @@
 <ion-app>
-  <app-menu [titulo] = "'Menú'"></app-menu>
-<ion-content id="main-content">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button defaultHref="/inicio"></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Inicio</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-
-  <ion-content class="ion-padding">
-    <ion-grid>
-      <ion-row>
-        <!-- Card 1: Últimas Tendencias -->
-        <ion-col size="12" size-md="4">
-          <ion-card color="dark">
-            <ion-card-header>
-              <ion-card-title>Últimas Tendencias</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <img src="" alt="">
-              <p>Descubre las recetas más populares del momento.</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <!-- Card 2: Recomendaciones de esta Semana -->
-        <ion-col size="12">
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12">
-                <h2 class="section-title">Recomendaciones para {{correo}}</h2>
-                <br>
-                <ion-card color="dark" class="custom-card">
-                  <ion-card-content class="card-content">
-                    <img src="assets/comidachinaa.png" alt="Imagen de comida china" class="img-reducida">
-                    <div class="overlay-text">
-                      <h3>Recetas Chinas</h3>
-                    </div>
-                  </ion-card-content>
-                </ion-card>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-col>
-        
-
-        <!-- Card 3: Etiquetas Disponibles -->
-        <ion-col size="12" size-md="12">
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Etiquetas Disponibles</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <p>Explora recetas según tus intereses:</p>
-              <ion-grid>
-                <ion-row>
-                  <ion-col size="6">
-                    <ion-chip color="primary">
-                      <ion-label>Recetas Chinas</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="secondary">
-                      <ion-label>Recetas Italianas</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="tertiary">
-                      <ion-label>Recetas Mexicanas</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="primary">
-                      <ion-label>Recetas Japonesas</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="secondary">
-                      <ion-label>Recetas Francesas</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="tertiary">
-                      <ion-label>Postres Internacionales</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="primary">
-                      <ion-label>Comida Rápida Saludable</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="secondary">
-                      <ion-label>Cocina Vegetariana</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="tertiary">
-                      <ion-label>Recetas de Mariscos</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="primary">
-                      <ion-label>Cocina Mediterránea</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="secondary">
-                      <ion-label>Recetas para Desayuno</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="tertiary">
-                      <ion-label>Recetas Sin Gluten</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="primary">
-                      <ion-label>Cocina Vegana</ion-label>
-                    </ion-chip>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-chip color="secondary">
-                      <ion-label>Recetas Festivas</ion-label>
-                    </ion-chip>
-                  </ion-col>
-       
-
-                </ion-row>
-              </ion-grid>
-            </ion-card-content>
-            
-
-          </ion-card>
-        </ion-col>
-                
-      </ion-row>
-    </ion-grid>
+  <app-menu [titulo]="'Menú'"></app-menu>
+  <ion-content id="main-content">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button defaultHref="/inicio"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Inicio</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-grid>
+        <ion-row>
+          <!-- Card 1: Últimas Tendencias -->
+          <ion-col size="12" size-md="4">
+            <ion-card color="dark">
+              <ion-card-header>
+                <ion-card-title>Últimas Tendencias</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <img src="" alt="">
+                <p>Descubre las recetas más populares del momento.</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <!-- Card 2: Recomendaciones de esta Semana -->
+          <ion-col size="12">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <h2 class="section-title">Recomendaciones para {{nombre}}</h2>
+                  <br>
+                  <ion-card color="dark" class="custom-card">
+                    <ion-card-content class="card-content">
+                      <img src="assets/comidachinaa.png" alt="Imagen de comida china" class="img-reducida">
+                      <div class="overlay-text">
+                        <h3>Recetas Chinas</h3>
+                      </div>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <!-- Card 3: Etiquetas Disponibles -->
+          <ion-col size="12" size-md="12">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Etiquetas Disponibles</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>Explora recetas según tus intereses:</p>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="6">
+                      <ion-chip color="primary">
+                        <ion-label>Recetas Chinas</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="secondary">
+                        <ion-label>Recetas Italianas</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="tertiary">
+                        <ion-label>Recetas Mexicanas</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="primary">
+                        <ion-label>Recetas Japonesas</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="secondary">
+                        <ion-label>Recetas Francesas</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="tertiary">
+                        <ion-label>Postres Internacionales</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="primary">
+                        <ion-label>Comida Rápida Saludable</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="secondary">
+                        <ion-label>Cocina Vegetariana</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="tertiary">
+                        <ion-label>Recetas de Mariscos</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="primary">
+                        <ion-label>Cocina Mediterránea</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="secondary">
+                        <ion-label>Recetas para Desayuno</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="tertiary">
+                        <ion-label>Recetas Sin Gluten</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="primary">
+                        <ion-label>Cocina Vegana</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-chip color="secondary">
+                        <ion-label>Recetas Festivas</ion-label>
+                      </ion-chip>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
   </ion-content>
-</ion-content>
-
 </ion-app>
