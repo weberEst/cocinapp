@@ -5,32 +5,20 @@
   <!-- Información del perfil -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Nombre del Usuario</ion-card-title>
+      <ion-card-title>Información del Usuario</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label>Nombre:</ion-label>
-        <ion-input value="Nombre del Usuario" readonly></ion-input>
+        <ion-label>Nombre de Usuario: {{nombre}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>Email:</ion-label>
-        <ion-input value="usuario@ejemplo.com" readonly></ion-input>
+        <ion-label>Email: {{correo}}</ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>
-
-  <!-- Publicaciones del usuario -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Publicaciones</ion-card-title>
+      <ion-card-title>Ubicación</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let publicacion of publicaciones" (click)="viewPublicacion(publicacion.id)">
-          {{ publicacion.titulo }}
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
   </ion-card>
-
 </ion-content>

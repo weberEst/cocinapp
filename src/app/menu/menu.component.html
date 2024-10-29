@@ -10,6 +10,10 @@
         <ion-icon name="search-outline" slot="start"></ion-icon>
         Buscador
       </ion-item>
+      <ion-item (click)="navigateTo('/perfil')" routerDirection="root">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        Perfil
+      </ion-item>
       <ion-item (click)="navigateTo('/configuracion')" routerDirection="root">
         <ion-icon name="settings-outline" slot="start"></ion-icon>
         Configuración
