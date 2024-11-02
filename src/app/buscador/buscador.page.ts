@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service'; // Asegúrate de que la ruta sea correcta
+import { FirebaseLoginService } from '../servicios/firebase-login.service'; // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-buscador',
@@ -10,9 +11,9 @@ import { ApiService } from 'src/app/servicios/api.service'; // Asegúrate de que
 export class BuscadorPage implements OnInit {
   recetas: any[] = []; // Array para almacenar las recetas
   busqueda: string = ''; // Variable para almacenar el término de búsqueda
-  titulo : string = '';
+  titulo: string = '';
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(private router: Router, private apiService: ApiService, private firebaseLoginService: FirebaseLoginService) {}
 
   ngOnInit() {
     this.cargarRecetas(); // Cargar todas las recetas al iniciar la página
@@ -26,6 +27,18 @@ export class BuscadorPage implements OnInit {
       },
       (error) => {
         console.error('Error al obtener las recetas', error);
+      }
+    );
+  }
+
+  // Cargar recetas desde la base de datos
+  cargarRecetasBD() {
+    this.firebaseLoginService.obtenerRecetasDeBD().subscribe(
+      (recetasBD) => {
+        this.recetas = recetasBD; // Almacena las recetas obtenidas de la BD
+      },
+      (error) => {
+        console.error('Error al obtener recetas de la BD', error);
       }
     );
   }
@@ -46,11 +59,9 @@ export class BuscadorPage implements OnInit {
     }
   }
 
-  // Navegación a la página de publicación
-// Navegación a la página de publicación y guardar la receta seleccionada
-navigateTo(receta: any, path: string) {
-  localStorage.setItem('recetaSeleccionada', JSON.stringify(receta)); // Guardar la receta en localStorage
-  this.router.navigate([path]); // Navegar a la página de publicación
-}
-
+  // Navegación a la página de publicación y guardar la receta seleccionada
+  navigateTo(receta: any, path: string) {
+    localStorage.setItem('recetaSeleccionada', JSON.stringify(receta)); // Guardar la receta en localStorage
+    this.router.navigate([path]); // Navegar a la página de publicación
+  }
 }

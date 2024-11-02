@@ -44,7 +44,7 @@ export class FirebaseLoginService {
 
     return userCredential;
   }
-  
+
   // Método para obtener el estado de autenticación del usuario
   getCurrentUser(): Observable<any> {
     return this.AngFireAuth.authState;
@@ -55,5 +55,20 @@ export class FirebaseLoginService {
     const docRef = this.FireStore.doc<UserData>(`users/${uid}`);
     const snapshot = await firstValueFrom(docRef.get());
     return snapshot as DocumentSnapshot<UserData>; 
+  }
+
+  // Método para probar la conexión a Firestore
+  async probarConexion(): Promise<string> {
+    try {
+      await this.FireStore.collection('publicaciones').get().toPromise();
+      return 'Conexión exitosa con Firebase';
+    } catch (error) {
+      console.error('Error en la conexión con Firebase:', error); // Agrega esta línea
+      return 'Error en la conexión con Firebase: ' + error;
+    }
+  }
+
+  obtenerRecetasDeBD(): Observable<any[]> {
+    return this.FireStore.collection('publicaciones').valueChanges(); // Usa FireStore aquí
   }
 }

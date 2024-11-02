@@ -1,4 +1,4 @@
-<app-header [titulo] = "'Buscador'" [Direccion] = "'/inicio'"></app-header>
+<app-header [titulo]="'Buscador'" [Direccion]="'/inicio'"></app-header>
 
 <ion-content>
   <ion-searchbar
@@ -6,6 +6,8 @@
     [(ngModel)]="busqueda"
     (ionInput)="buscarRecetas()"
   ></ion-searchbar>
+
+  <ion-button expand="full" (click)="cargarRecetasBD()">Ver Recetas de BD</ion-button>
 
   <ion-list *ngIf="recetas.length > 0">
     <ion-item *ngFor="let receta of recetas" (click)="navigateTo(receta, '/publicacion')">
@@ -15,5 +17,4 @@
       <img [src]="receta.strMealThumb" alt="{{ receta.strMeal }}" style="width: 50px; height: 50px;" />
     </ion-item>
   </ion-list>
-  
 </ion-content>

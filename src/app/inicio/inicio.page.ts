@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { FirebaseLoginService } from '../servicios/firebase-login.service'; 
-import { User } from 'firebase/auth'; // Importar User de Firebase
+import { User } from 'firebase/auth'; 
 
 @Component({
   selector: 'app-inicio',
@@ -11,14 +11,15 @@ import { User } from 'firebase/auth'; // Importar User de Firebase
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage {
-  nombre: string = ''; // Inicializa una variable para el nombre
+  nombre: string = '';
+  conexionEstado: string = ''; // Variable para almacenar el estado de conexión
 
   constructor(
     private router: Router, 
     private storage: Storage, 
     private firebaseLoginService: FirebaseLoginService
   ) {
-    this.obtenerUbicacion(); // Llamada a la función de geolocalización
+    this.obtenerUbicacion();
   }
 
   // Función para navegar a diferentes rutas
@@ -28,32 +29,43 @@ export class InicioPage {
 
   // Función para obtener la ubicación del usuario
   async obtenerUbicacion() {
-    const coordenadas = await Geolocation.getCurrentPosition();
-    console.log('Latitud ', coordenadas.coords.latitude);
-    console.log('Longitud', coordenadas.coords.longitude);
+    try {
+      const coordenadas = await Geolocation.getCurrentPosition();
+      console.log('Latitud ', coordenadas.coords.latitude);
+      console.log('Longitud', coordenadas.coords.longitude);
+    } catch (error) {
+      console.error('Error al obtener la ubicación:', error);
+    }
   }
 
   // Función que se ejecuta al inicializar la página
   async ngOnInit() {
     const storage = await this.storage.create();
 
-    // Obtener el usuario actual desde Firebase Authentication
-    this.firebaseLoginService.getCurrentUser().subscribe(async (user: User | null) => { 
-      if (user) {
-        // Usa el UID del usuario autenticado para buscar el nombre en Firestore
-        const uid = user.uid;
+    try {
+      // Probar la conexión a Firebase
+      this.conexionEstado = await this.firebaseLoginService.probarConexion();
+      console.log(this.conexionEstado); // Mostrar el estado de conexión por consola
 
-        // Obtener el documento del usuario desde Firestore
-        const usuarioDoc = await this.firebaseLoginService.getUserData(uid);
-        if (usuarioDoc.exists) { // Cambiado a .exists para la compatibilidad
-          const userData = usuarioDoc.data(); // Obtén los datos del usuario
-          this.nombre = userData?.usuario || 'Usuario'; // Asigna el nombre del usuario
+      // Obtener el usuario actual desde Firebase Authentication
+      this.firebaseLoginService.getCurrentUser().subscribe(async (user: User | null) => { 
+        if (user) {
+          const uid = user.uid;
+          const usuarioDoc = await this.firebaseLoginService.getUserData(uid);
+          if (usuarioDoc.exists) {
+            const userData = usuarioDoc.data();
+            this.nombre = userData?.usuario || 'Usuario';
+          } else {
+            this.nombre = 'Usuario no encontrado';
+          }
         } else {
-          this.nombre = 'Usuario no encontrado'; // Mensaje en caso de que no se encuentre el documento
+          this.nombre = 'No estás logueado';
         }
-      } else {
-        this.nombre = 'No estás logueado'; // Mensaje en caso de que no haya usuario logueado
-      }
-    });
+      });
+    } catch (error) {
+      console.error('Error en ngOnInit:', error);
+      this.conexionEstado = 'Error al conectar';
+      this.nombre = 'Error al obtener el usuario';
+    }
   }
 }
