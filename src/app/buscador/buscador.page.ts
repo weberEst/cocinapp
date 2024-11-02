@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/servicios/api.service'; // Asegúrate de que la ruta sea correcta
-import { FirebaseLoginService } from '../servicios/firebase-login.service'; // Asegúrate de que la ruta sea correcta
+import { ApiService } from 'src/app/servicios/api.service';
+import { FirebaseLoginService } from '../servicios/firebase-login.service';
+import { RecetasBdService } from '../servicios/recetasbd.service'; // Asegúrate de que el nombre y la ruta sean correctos
 
 @Component({
   selector: 'app-buscador',
@@ -9,21 +10,25 @@ import { FirebaseLoginService } from '../servicios/firebase-login.service'; // A
   styleUrls: ['./buscador.page.scss'],
 })
 export class BuscadorPage implements OnInit {
-  recetas: any[] = []; // Array para almacenar las recetas
-  busqueda: string = ''; // Variable para almacenar el término de búsqueda
-  titulo: string = '';
+  recetas: any[] = [];
+  busqueda: string = '';
 
-  constructor(private router: Router, private apiService: ApiService, private firebaseLoginService: FirebaseLoginService) {}
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private firebaseLoginService: FirebaseLoginService,
+    private recetasBdService: RecetasBdService // Asegúrate de que el nombre del servicio sea correcto
+  ) {}
 
   ngOnInit() {
-    this.cargarRecetas(); // Cargar todas las recetas al iniciar la página
+    this.cargarRecetas();
   }
 
   // Cargar todas las recetas al iniciar la página
   cargarRecetas() {
     this.apiService.obtenerRecetas().subscribe(
       (data) => {
-        this.recetas = data.meals; // Almacena las recetas en la variable
+        this.recetas = data.meals || [];
       },
       (error) => {
         console.error('Error al obtener las recetas', error);
@@ -31,11 +36,11 @@ export class BuscadorPage implements OnInit {
     );
   }
 
-  // Cargar recetas desde la base de datos
+  // Cargar recetas desde Firebase
   cargarRecetasBD() {
-    this.firebaseLoginService.obtenerRecetasDeBD().subscribe(
+    this.recetasBdService.getRecetasBD().subscribe( // Utiliza el método correcto de tu servicio
       (recetasBD) => {
-        this.recetas = recetasBD; // Almacena las recetas obtenidas de la BD
+        this.recetas = recetasBD || [];
       },
       (error) => {
         console.error('Error al obtener recetas de la BD', error);
@@ -48,7 +53,7 @@ export class BuscadorPage implements OnInit {
     if (this.busqueda.trim()) {
       this.apiService.obtenerRecetasPorNombre(this.busqueda).subscribe(
         (data) => {
-          this.recetas = data.meals ? data.meals : []; // Actualiza el array con los resultados de la búsqueda
+          this.recetas = data.meals || [];
         },
         (error) => {
           console.error('Error al buscar recetas', error);
@@ -61,7 +66,7 @@ export class BuscadorPage implements OnInit {
 
   // Navegación a la página de publicación y guardar la receta seleccionada
   navigateTo(receta: any, path: string) {
-    localStorage.setItem('recetaSeleccionada', JSON.stringify(receta)); // Guardar la receta en localStorage
-    this.router.navigate([path]); // Navegar a la página de publicación
+    localStorage.setItem('recetaSeleccionada', JSON.stringify(receta));
+    this.router.navigate([path]);
   }
 }

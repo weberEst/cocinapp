@@ -7,12 +7,13 @@
     (ionInput)="buscarRecetas()"
   ></ion-searchbar>
 
-  <ion-button expand="full" (click)="cargarRecetasBD()">Ver Recetas de BD</ion-button>
+  <ion-button expand="full" (click)="cargarRecetasBD()">Ver Recetas ORIGINALES DE COCINAPP</ion-button>
 
   <ion-list *ngIf="recetas.length > 0">
     <ion-item *ngFor="let receta of recetas" (click)="navigateTo(receta, '/publicacion')">
       <ion-label>
-        <h2>{{ receta.strMeal }}</h2>
+        <h2>{{ receta.strMeal || receta.titulo }} </h2>
+
       </ion-label>
       <img [src]="receta.strMealThumb" alt="{{ receta.strMeal }}" style="width: 50px; height: 50px;" />
     </ion-item>

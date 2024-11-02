@@ -6,7 +6,7 @@
       <!-- Sección del Título -->
       <ion-card>
         <ion-card-header>
-          <ion-card-title>{{ receta?.strMeal }}</ion-card-title> <!-- Título dinámico -->
+          <ion-card-title>{{ receta?.strMeal  || receta.titulo }} </ion-card-title> <!-- Título dinámico -->
         </ion-card-header>
         <ion-card-content>
           <!-- Imagen de la Publicación -->
@@ -18,12 +18,16 @@
       <ion-card>
         <ion-card-header>
           <ion-card-title>Ingredientes</ion-card-title>
+          
         </ion-card-header>
         <ion-card-content>
           <!-- Aquí agregarías los ingredientes dinámicos si los tienes disponibles -->
+           
                 <ul>
+                  {{ receta.ingredientes  }}
                   <li *ngFor="let ingredient of ingredientes">
                     {{ ingredient }}
+                    
                   </li>
                 </ul>
         </ion-card-content>
@@ -35,7 +39,7 @@
           <ion-card-title>Pasos</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <p>{{ receta?.strInstructions }}</p> <!-- Pasos dinámicos -->
+          <p>{{ receta?.strInstructions  || receta.pasos }} </p> <!-- Pasos dinámicos -->
         </ion-card-content>
       </ion-card>
 
