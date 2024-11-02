@@ -5,10 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { provideHttpClient } from '@angular/common/http'; // Importar provideHttpClient
-import { AngularFireModule} from '@angular/fire/compat';
-import { AngularFireAuthModule} from '@angular/fire/compat/auth';
-import { environment }  from 'src/environments/environment';
+import { provideHttpClient } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; // Importar AngularFirestoreModule
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,11 @@ import { environment }  from 'src/environments/environment';
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule // Agregar AngularFirestoreModule aquí
   ],
   providers: [
-    provideHttpClient() // Proveer HttpClient aquí
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })
