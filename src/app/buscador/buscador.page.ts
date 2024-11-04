@@ -11,7 +11,10 @@ import { RecetasBdService } from '../servicios/recetasbd.service'; // Asegúrate
 })
 export class BuscadorPage implements OnInit {
   recetas: any[] = [];
+  recetasAPI: any[] = [];
+  recetasBD: any[] = [];
   busqueda: string = '';
+  tipoRecetas: string = 'api'; // Variable para controlar el tipo de recetas a mostrar
 
   constructor(
     private router: Router,
@@ -21,26 +24,30 @@ export class BuscadorPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cargarRecetas();
+    this.cargarRecetasAPI(); // Cargar recetas genéricas al iniciar
   }
 
-  // Cargar todas las recetas al iniciar la página
-  cargarRecetas() {
+  // Cargar recetas genéricas (API) al iniciar o al presionar el botón
+  cargarRecetasAPI() {
     this.apiService.obtenerRecetas().subscribe(
       (data) => {
-        this.recetas = data.meals || [];
+        this.recetasAPI = data.meals || [];
+        this.recetas = this.recetasAPI; // Mostrar recetas de la API
+        this.tipoRecetas = 'api';
       },
       (error) => {
-        console.error('Error al obtener las recetas', error);
+        console.error('Error al obtener las recetas de la API', error);
       }
     );
   }
 
   // Cargar recetas desde Firebase
   cargarRecetasBD() {
-    this.recetasBdService.getRecetasBD().subscribe( // Utiliza el método correcto de tu servicio
+    this.recetasBdService.getRecetasBD().subscribe(
       (recetasBD) => {
-        this.recetas = recetasBD || [];
+        this.recetasBD = recetasBD || [];
+        this.recetas = this.recetasBD; // Mostrar recetas de la BD
+        this.tipoRecetas = 'bd';
       },
       (error) => {
         console.error('Error al obtener recetas de la BD', error);
@@ -48,19 +55,16 @@ export class BuscadorPage implements OnInit {
     );
   }
 
-  // Buscar recetas según el término ingresado
+  // Buscar recetas según el término ingresado en el conjunto de datos seleccionado
   buscarRecetas() {
+    const recetasOrigen = this.tipoRecetas === 'api' ? this.recetasAPI : this.recetasBD;
+
     if (this.busqueda.trim()) {
-      this.apiService.obtenerRecetasPorNombre(this.busqueda).subscribe(
-        (data) => {
-          this.recetas = data.meals || [];
-        },
-        (error) => {
-          console.error('Error al buscar recetas', error);
-        }
+      this.recetas = recetasOrigen.filter((receta) =>
+        (receta.strMeal || receta.titulo).toLowerCase().includes(this.busqueda.toLowerCase())
       );
     } else {
-      this.cargarRecetas(); // Cargar todas las recetas si no hay término de búsqueda
+      this.recetas = recetasOrigen; // Restaurar la lista completa si no hay término de búsqueda
     }
   }
 
