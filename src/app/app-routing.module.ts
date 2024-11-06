@@ -53,6 +53,16 @@ const routes: Routes = [
   }
   ,
   {
+    path: 'google-map',
+    loadChildren: () => import('./google-map/google-map.module').then( m => m.GoogleMapPageModule)
+  }
+  ,
+  {
+    path: 'google-map',
+    loadChildren: () => import('./google-map/google-map.module').then( m => m.GoogleMapPageModule)
+  }
+  ,
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -62,6 +72,8 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'home'
   },
+
+
 
 
 ];

@@ -10,7 +10,7 @@ import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage{
 
   correo: string = "";
   contrasenna: string = "";
@@ -45,20 +45,21 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
-  ingresar() {
+  async ingresar() {
     if (this.correo === "" || this.contrasenna === "") {
       this.Alerta();
     }
     else {
-      this.loginfirebase.login(this.correo,this.contrasenna).then(()=>{
+      try{this.loginfirebase.login(this.correo,this.contrasenna)
+        await this.storage.create();
         this.storage.set("SessionId", true)
         console.log("Inicio de sesión exitoso");
         this.Exito();
         this.route.navigate(["/inicio"])
-      }).catch(()=>{
+      }catch(error){
         console.log("Error al iniciar sesión")
         this.Error();
-      })
+      }
 
     }
   }
@@ -67,8 +68,5 @@ export class LoginPage implements OnInit {
     this.route.navigate(["/registro"]);
   }
 
-  async ngOnInit() {
-    const storage = await this.storage.create();
-  }
 
 }

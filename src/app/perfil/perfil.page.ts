@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth'; // Importar User de Firebase
-import { Geolocation } from '@capacitor/geolocation';
 import { FirebaseLoginService } from '../servicios/firebase-login.service'; 
 
 @Component({

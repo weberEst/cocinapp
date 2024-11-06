@@ -14,8 +14,6 @@ export class HomePage {
 constructor(public mensaje:ToastController, private route:Router, public alerta:AlertController, private storage : Storage) {}
 
 async ingresar(){
-
-  await this.storage.create();
     // Obtener el correo del almacenamiento
   const SessionId = await this.storage.get("SessionId");
   
