@@ -63,6 +63,10 @@ const routes: Routes = [
   }
   ,
   {
+    path: 'cuenta',
+    loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -72,6 +76,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'home'
   },
+
 
 
 

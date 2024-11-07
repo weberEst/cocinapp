@@ -50,8 +50,7 @@ export class LoginPage{
       this.Alerta();
     }
     else {
-      try{this.loginfirebase.login(this.correo,this.contrasenna)
-        await this.storage.create();
+      try{await this.loginfirebase.login(this.correo,this.contrasenna)
         this.storage.set("SessionId", true)
         console.log("Inicio de sesión exitoso");
         this.Exito();

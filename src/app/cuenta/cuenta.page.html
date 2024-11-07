@@ -1,0 +1,44 @@
+<ion-app>
+  <app-header [titulo] = "'Cuenta'" [Direccion] = "'/configuracion'"></app-header>
+
+  <ion-content [fullscreen]="true">
+
+    <button id="button">
+      <ion-card >
+      <ion-card-content>
+        <ion-title>Soporte</ion-title>
+      </ion-card-content>
+    </ion-card>
+    </button>
+
+
+    <button id="button">
+      <ion-card >
+        <ion-card-content>
+          <ion-title>Idioma y Región</ion-title>
+        </ion-card-content>
+      </ion-card>
+    </button>
+
+    <button id="button" (click) = "cerrarSesion()">
+      <ion-card >
+        <ion-card-content>
+          <ion-title style="color: red;">Cerrar sesión</ion-title>
+        </ion-card-content>
+      </ion-card>
+    </button>
+
+    <button id="button" >
+      <ion-card >
+        <ion-card-content>
+          <ion-title style="color: red;">Eliminar cuenta</ion-title>
+        </ion-card-content>
+      </ion-card>
+    </button>
+
+
+
+
+  </ion-content>
+
+</ion-app>

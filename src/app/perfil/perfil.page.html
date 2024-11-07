@@ -19,7 +19,12 @@
   <button id="button" [routerLink]="['/google-map']">
     <ion-card >
       <ion-card-content>
-        <ion-title>Mi Ubicación</ion-title>
+        <ion-item lines="none">
+          <!-- Icono de flecha hacia la izquierda -->
+          <ion-icon name="arrow-forward" slot="start"></ion-icon>
+          <!-- Título a la derecha del icono -->
+          <ion-title>Mi Ubicación</ion-title>
+        </ion-item>
       </ion-card-content>
     </ion-card>
   </button>
