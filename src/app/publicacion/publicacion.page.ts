@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'; // Para URLs seguras
+import { FirebaseLoginService } from '../servicios/firebase-login.service'; 
+import { User } from 'firebase/auth'; 
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
+
 
 @Component({
   selector: 'app-publicacion',
@@ -12,12 +17,17 @@ export class PublicacionPage implements OnInit {
   comentario: string = "";
   receta: any = {}; // Variable para almacenar la receta seleccionada
   ingredientes: string[] =[];
+  titulo: string= "";
+  postId: string="aZ9PupGYvEBxNFZLvYzn"
 
   constructor(
     public mensaje: ToastController,
     private route: Router,
     public alerta: AlertController,
-    private sanitizer: DomSanitizer // Inyectamos el servicio para sanitizar URLs
+    private sanitizer: DomSanitizer, // Inyectamos el servicio para sanitizar URLs
+    private firebaseLoginService: FirebaseLoginService,
+    private firestore: AngularFirestore
+  
   ) {}
 
 
@@ -25,6 +35,8 @@ export class PublicacionPage implements OnInit {
     const recetaGuardada = localStorage.getItem('recetaSeleccionada');
     if (recetaGuardada) {
       this.receta = JSON.parse(recetaGuardada); // Recuperar la receta
+      const recetaId = this.receta?.id;
+      console.log('ID de la receta:', recetaId);
       this.mostrarIngredientes();
     }
   }
@@ -66,12 +78,16 @@ export class PublicacionPage implements OnInit {
     toast.present();
   }
 
-  Like() {
-    this.mensajeLike();
+  async MensajeGuardadoError() {
+    const toast = await this.mensaje.create({
+      message: 'Error al guardar la publicación',
+      duration: 2000,
+    });
+    toast.present();
   }
 
-  Guardado() {
-    this.MensajeGuardada();
+  Like() {
+    this.mensajeLike();
   }
 
   Comentar() {
@@ -94,6 +110,24 @@ export class PublicacionPage implements OnInit {
       this.ingredientes.push(ingredient || 'No se encontraron ingredientes');
       i++;    
     }
+  }
+
+  guardarPublicacion( postId: string){
+    this.firebaseLoginService.getCurrentUser().subscribe(async (user: User | null) => { 
+      if (user) {
+        const uid = user.uid;
+
+        this.firestore.collection('users').doc(uid).collection('saved_posts').doc(postId).set({
+          postId: postId
+        }).then(() => {
+          this.MensajeGuardada();
+        }).catch((error) => {
+          this.MensajeGuardadoError();
+        });
+      } else {
+        console.log('Usuario no autenticado');
+      }
+    });
   }
 
 }

@@ -61,7 +61,8 @@ export class BuscadorPage implements OnInit {
 
     if (this.busqueda.trim()) {
       this.recetas = recetasOrigen.filter((receta) =>
-        (receta.strMeal || receta.titulo).toLowerCase().includes(this.busqueda.toLowerCase())
+        (receta.strMeal || receta.titulo).toLowerCase().includes(this.busqueda.toLowerCase()) ||
+        (receta.strCategory || receta.categoria).toLowerCase().includes(this.busqueda.toLowerCase())
       );
     } else {
       this.recetas = recetasOrigen; // Restaurar la lista completa si no hay término de búsqueda

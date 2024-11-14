@@ -32,6 +32,28 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="text-center">Categoría</ion-card-title>
+    </ion-card-header>
+    <ion-select [(ngModel)]="categoria" name="categoria" required class="text-center">
+      <ion-select-option value="Recetas Chinas">Recetas Chinas</ion-select-option>
+      <ion-select-option value="Recetas Italianas">Recetas Italianas</ion-select-option>
+      <ion-select-option value="Recetas Mexicanas">Recetas Mexicanas</ion-select-option>
+      <ion-select-option value="Recetas Japonesas">Recetas Japonesas</ion-select-option>
+      <ion-select-option value="Recetas Francesas">Recetas Francesas</ion-select-option>
+      <ion-select-option value="Postres Internacionales">Postres Internacionales</ion-select-option>
+      <ion-select-option value="Comida Rápida Saludable">Comida Rápida Saludable</ion-select-option>
+      <ion-select-option value="Cocina Vegetariana">Cocina Vegetariana</ion-select-option>
+      <ion-select-option value="Recetas de Mariscos">Recetas de Mariscos</ion-select-option>
+      <ion-select-option value="Cocina Mediterránea">Cocina Mediterránea</ion-select-option>
+      <ion-select-option value="Recetas para Desayuno">Recetas para Desayuno</ion-select-option>
+      <ion-select-option value="Recetas Sin Gluten">Recetas Sin Gluten</ion-select-option>
+      <ion-select-option value="Cocina Vegana">Cocina Vegana</ion-select-option>
+      <ion-select-option value="Recetas Festivas">Recetas Festivas</ion-select-option>
+    </ion-select>
+  </ion-card>
+
   <!-- Sección de Pasos -->
   <ion-card>
     <ion-card-header>

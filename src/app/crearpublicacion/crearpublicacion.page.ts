@@ -17,6 +17,7 @@ export class CrearpublicacionPage implements OnInit {
   titulo: string = "";
   ingredientes: string = "";
   pasos: string = "";
+  categoria: string="";
 
   constructor(
     public mensaje: ToastController,
@@ -52,7 +53,7 @@ export class CrearpublicacionPage implements OnInit {
   }
 
   async Publicar() {
-    if (this.titulo === "" && this.ingredientes === "" && this.pasos === "") {
+    if (this.titulo === "" && this.ingredientes === "" && this.pasos === "" && this.categoria === "") {
       console.log("No pueden estar los campos vacíos");
       this.MensajeError();
     } else {
@@ -60,8 +61,9 @@ export class CrearpublicacionPage implements OnInit {
         titulo: this.titulo,
         ingredientes: this.ingredientes,
         pasos: this.pasos,
-        fecha: new Date() // Agregar la fecha de creación
-      };
+        fecha: new Date(), // Agregar la fecha de creación
+        categoria: this.categoria,
+      }
 
       try {
         await this.firestore.collection('publicaciones').add(publicacion);

@@ -6,3 +6,20 @@ ion-card {
   ion-textarea {
     margin-top: 10px;
   }
+
+  ion-select {
+    text-align: center; /* Centra el texto */
+    display: flex;
+    justify-content: center; /* Alinea el contenido horizontalmente */
+    align-items: center; /* Alinea el contenido verticalmente */
+  }
+  
+  ion-select::part(text) {
+    text-align: center; /* Centra el texto seleccionado */
+  }
+  
+  ion-select {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+  }
+
+  

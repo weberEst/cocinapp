@@ -1,16 +1,21 @@
 <ion-app>
-  <app-header [titulo] = "receta?.strMeal" [Direccion] = "'/buscador'"></app-header>
+  <app-header [titulo] = "receta?.strMeal  || receta.titulo" [Direccion] = "'/buscador'"></app-header>
 
   <ion-content id="main-content">
     <ion-content class="ion-padding">
-      <!-- Sección del Título -->
       <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ receta?.strMeal  || receta.titulo }} </ion-card-title> <!-- Título dinámico -->
-        </ion-card-header>
         <ion-card-content>
           <!-- Imagen de la Publicación -->
-          <img [src]="receta?.strMealThumb" alt="{{ receta?.strMeal }}" style="width: 100%; height: auto;" /> <!-- Imagen dinámica -->
+          <img [src]="receta?.strMealThumb" alt="{{ receta?.strMeal || receta.titulo }}" style="width: 100%; height: auto;" /> <!-- Imagen dinámica -->
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Categoría</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ receta?.strCategory  || receta.categoria }} </p> <!-- Pasos dinámicos -->
         </ion-card-content>
       </ion-card>
 
@@ -63,7 +68,7 @@
       <ion-card>
         <ion-card-content>
           <ion-button expand="full" color="primary" (click)="Like()">Like</ion-button>
-          <ion-button expand="full" (click)="Guardado()">Guardar</ion-button>
+          <ion-button expand="full" (click)="guardarPublicacion(postId)">Guardar</ion-button>
         </ion-card-content>
       </ion-card>
 
