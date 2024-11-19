@@ -18,6 +18,7 @@ export class CrearpublicacionPage implements OnInit {
   ingredientes: string = "";
   pasos: string = "";
   categoria: string="";
+  idPublicacion: string="";
 
   constructor(
     public mensaje: ToastController,
@@ -57,12 +58,14 @@ export class CrearpublicacionPage implements OnInit {
       console.log("No pueden estar los campos vacíos");
       this.MensajeError();
     } else {
+      const nuevoID = this.generarIdUnico();
       const publicacion = {
         titulo: this.titulo,
         ingredientes: this.ingredientes,
         pasos: this.pasos,
         fecha: new Date(), // Agregar la fecha de creación
         categoria: this.categoria,
+        idPublicacion: nuevoID,
       }
 
       try {
@@ -74,6 +77,12 @@ export class CrearpublicacionPage implements OnInit {
         console.error("Error al crear la publicación: ", error);
       }
     }
+  }
+
+  generarIdUnico(): string {
+    const timestamp = Date.now();
+    const random = Math.floor(Math.random() * 1000);
+    return `${timestamp}-${random}`;
   }
 
   ngOnInit() { }

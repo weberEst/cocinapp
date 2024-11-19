@@ -12,6 +12,7 @@ export class RegistroPage implements OnInit {
   usuario: string = "";
   contrasenna: string = "";
   correo : string ="";
+  publicacionesGuardadas: string[] = [];
 
   constructor(
     private acces: FirebaseLoginService,
