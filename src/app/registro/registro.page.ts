@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {  ToastController } from '@ionic/angular';
 import { FirebaseLoginService } from '../servicios/firebase-login.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-registro',
@@ -18,6 +19,7 @@ export class RegistroPage implements OnInit {
     private acces: FirebaseLoginService,
     private route: Router,
     private mensaje: ToastController,
+    private firestore: AngularFirestore
   ) {}
 
   ngOnInit() {}
@@ -67,7 +69,7 @@ export class RegistroPage implements OnInit {
       this.ContrasenaInvalida();
     }
     else {
-      await this.acces.crearUsuario(this.usuario, this.contrasenna, this.correo).then(()=>{
+      await this.acces.crearUsuario(this.usuario, this.contrasenna, this.correo, this.publicacionesGuardadas).then(()=>{
         console.log("Inicio de sesión exitoso");
       this.Exito();
       this.route.navigate(["/inicio"]);

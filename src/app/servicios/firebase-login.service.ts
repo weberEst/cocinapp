@@ -32,14 +32,15 @@ export class FirebaseLoginService {
     });
   }
 
-  async crearUsuario(usuario: string, contrasenna: string, email: string) {
+  async crearUsuario(usuario: string, contrasenna: string, email: string, publicacionesGuardadas: string[] = []) {
     const userCredential = await this.AngFireAuth.createUserWithEmailAndPassword(email, contrasenna);
     const IdUsuario = userCredential.user?.uid;
 
     await this.FireStore.doc(`users/${IdUsuario}`).set({
       email: email,
       usuario: usuario,
-      uid: IdUsuario
+      uid: IdUsuario,
+      publicacionesGuardadas: publicacionesGuardadas
     });
 
     return userCredential;
