@@ -6,6 +6,8 @@ import { FirebaseLoginService } from '../servicios/firebase-login.service';
 import { User } from '@firebase/auth'; 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
+
 
 
 
@@ -38,8 +40,8 @@ export class PublicacionPage implements OnInit {
     const recetaGuardada = localStorage.getItem('recetaSeleccionada');
     if (recetaGuardada) {
       this.receta = JSON.parse(recetaGuardada); // Recuperar la receta
-      const recetaId = this.receta?.idPublicacion;
-      console.log(recetaId)
+      this.postId = this.receta?.idPublicacion;
+      console.log(this.postId)
       this.mostrarIngredientes();
     }
 
@@ -107,7 +109,23 @@ export class PublicacionPage implements OnInit {
     }
   }
 
-
+  async guardarPublicacion(): Promise<void> {
+    if (this.uid) {
+      if (this.postId && this.uid) {
+        // Llama al método del servicio para guardar la publicación
+        this.firebaseLoginService.agregarPublicacionGuardada(this.uid, this.postId)
+          .then(() => {
+            this.MensajeGuardada()
+            console.log('Publicación guardada exitosamente');
+          })
+          .catch((error) => {
+            this.MensajeGuardadoError
+            console.error('Error al guardar la publicación', error);
+          });
+      } else {
+        console.log('No se ha encontrado el ID de la receta o el UID del usuario');
+      }
+    }}
 
   mostrarIngredientes() {
 

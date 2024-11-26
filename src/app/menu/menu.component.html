@@ -14,6 +14,10 @@
         <ion-icon name="person-outline" slot="start"></ion-icon>
         Perfil
       </ion-item>
+      <ion-item (click)="navigateTo('/guardados')" routerDirection="root">
+        <ion-icon name="bookmark" slot="start"></ion-icon>
+        Guardado
+      </ion-item>
       <ion-item (click)="navigateTo('/configuracion')" routerDirection="root">
         <ion-icon name="settings-outline" slot="start"></ion-icon>
         Configuración

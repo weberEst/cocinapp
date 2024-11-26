@@ -67,6 +67,10 @@ const routes: Routes = [
     loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
   },
   {
+    path: 'guardados',
+    loadChildren: () => import('./guardados/guardados.module').then( m => m.GuardadosPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -76,6 +80,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'home'
   },
+
 
 
 

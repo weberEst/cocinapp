@@ -4,11 +4,12 @@ import { AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firesto
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { firstValueFrom } from 'rxjs';
+import firebase from 'firebase/compat/app';
 
 interface UserData {
   email: string;
   usuario: string;
-  uid: string;
+  userid: string | null;
 }
 
 @Injectable({
@@ -56,6 +57,19 @@ export class FirebaseLoginService {
     const docRef = this.FireStore.doc<UserData>(`users/${uid}`);
     const snapshot = await firstValueFrom(docRef.get());
     return snapshot as DocumentSnapshot<UserData>; 
+  }
+
+
+
+  async agregarPublicacionGuardada(uid: string, idPublicacion: string): Promise<void> {
+    try {
+      this.FireStore.collection('users').doc(uid).update({
+        publicacionesGuardadas: firebase.firestore.FieldValue.arrayUnion(idPublicacion)})
+      console.log(idPublicacion)
+      console.log('Publicación guardada exitosamente');
+    } catch (error) {
+      console.error('Error al guardar la publicación', error);
+    }
   }
 
   // Método para probar la conexión a Firestore
