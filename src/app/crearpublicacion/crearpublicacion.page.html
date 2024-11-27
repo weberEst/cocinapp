@@ -11,16 +11,21 @@
       <ion-input label="Titulo "[(ngModel)]="titulo" name="titulo" placeholder="Ingresa el título de la publicación" required></ion-input>
     </ion-card-content>
   </ion-card>
+<!-- Sección de Imagen -->
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Imagen de la Publicación</ion-card-title>
+  </ion-card-header>
 
-  <!-- Sección de Imagen -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Imagen de la Publicación</ion-card-title>
-    </ion-card-header>
+  <!-- Botón para tomar la foto -->
+  <ion-button expand="full" color="primary" (click)="tomarFoto()">Tomar foto</ion-button>
 
-    <ion-button expand="full" color="primary" (click)="tomarFoto()" >Tomar foto</ion-button>
+  <!-- Mostrar la vista previa de la imagen seleccionada -->
+  <ion-card-content *ngIf="imagenBase64">
+    <img [src]="imagenBase64" alt="Vista previa de la imagen" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+  </ion-card-content>
+</ion-card>
 
-  </ion-card>
 
   <!-- Sección de Ingredientes -->
   <ion-card>

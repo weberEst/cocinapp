@@ -19,10 +19,12 @@ import firebase from 'firebase/compat/app';
 export class PublicacionPage implements OnInit {
   comentario: string = "";
   receta: any = {}; // Variable para almacenar la receta seleccionada
-  ingredientes: string[] =[];
-  titulo: string= "";
-  postId: string="";
-  uid: string="";
+  ingredientes: string[] = [];
+  titulo: string = "";
+  postId: string = "";
+  uid: string = "";
+  imagen: string = ""; // Nuevo campo para la imagen
+  
 
   constructor(
     public mensaje: ToastController,
@@ -36,20 +38,21 @@ export class PublicacionPage implements OnInit {
   ) {}
 
 
-  ngOnInit() {
+  ngOnInit(){
     const recetaGuardada = localStorage.getItem('recetaSeleccionada');
     if (recetaGuardada) {
       this.receta = JSON.parse(recetaGuardada); // Recuperar la receta
       this.postId = this.receta?.idPublicacion;
-      console.log(this.postId)
+      this.imagen = this.receta?.imagen || ''; // Asegúrate de que `imagen` sea el campo que contiene el Base64
+      console.log(this.imagen); // Confirmar que se recuperó correctamente
       this.mostrarIngredientes();
     }
-
-    this.firebaseLoginService.getCurrentUser().subscribe(async (user: User | null) => { 
+  
+    this.firebaseLoginService.getCurrentUser().subscribe(async (user: User | null) => {
       if (user) {
-        // Usa el UID del usuario autenticado para buscar el nombre en Firestore
-        this.uid = user.uid;}
-      })
+        this.uid = user.uid;
+      }
+    });
   }
 
   // Función para sanitizar el enlace de YouTube

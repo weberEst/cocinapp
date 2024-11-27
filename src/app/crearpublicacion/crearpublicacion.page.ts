@@ -17,26 +17,31 @@ export class CrearpublicacionPage implements OnInit {
   titulo: string = "";
   ingredientes: string = "";
   pasos: string = "";
-  categoria: string="";
-  idPublicacion: string="";
+  categoria: string = "";
+  idPublicacion: string = "";
+  imagenBase64: string = ""; // Para almacenar la imagen en Base64
 
   constructor(
     public mensaje: ToastController,
     private route: Router,
     public alerta: AlertController,
-    private firestore: AngularFirestore // Inyectar Firestore aquí
+    private firestore: AngularFirestore // Firestore para la base de datos
   ) { }
 
+  // Método para tomar una foto y convertirla a Base64
   async tomarFoto() {
     const imagen = await Camera.getPhoto({
       quality: 100,
       allowEditing: true,
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Base64, // Cambiar a Base64
       source: CameraSource.Camera,
     });
-    console.log(imagen.webPath);
+
+    this.imagenBase64 = `data:image/jpeg;base64,${imagen.base64String}`; // Guardar la imagen como cadena Base64
+    console.log("Imagen tomada:", this.imagenBase64);
   }
 
+  // Mostrar mensaje de éxito
   async mensajeExito() {
     const toast = await this.mensaje.create({
       message: 'Publicación creada con éxito',
@@ -45,6 +50,7 @@ export class CrearpublicacionPage implements OnInit {
     toast.present();
   }
 
+  // Mostrar mensaje de error
   async MensajeError() {
     const toast = await this.mensaje.create({
       message: 'No deben haber campos vacíos',
@@ -53,8 +59,9 @@ export class CrearpublicacionPage implements OnInit {
     toast.present();
   }
 
+  // Método para publicar
   async Publicar() {
-    if (this.titulo === "" && this.ingredientes === "" && this.pasos === "" && this.categoria === "") {
+    if (this.titulo === "" || this.ingredientes === "" || this.pasos === "" || this.categoria === "" || this.imagenBase64 === "") {
       console.log("No pueden estar los campos vacíos");
       this.MensajeError();
     } else {
@@ -63,10 +70,11 @@ export class CrearpublicacionPage implements OnInit {
         titulo: this.titulo,
         ingredientes: this.ingredientes,
         pasos: this.pasos,
-        fecha: new Date(), // Agregar la fecha de creación
+        fecha: new Date(), // Agregar fecha de creación
         categoria: this.categoria,
         idPublicacion: nuevoID,
-      }
+        imagen: this.imagenBase64, // Agregar imagen como Base64
+      };
 
       try {
         await this.firestore.collection('publicaciones').add(publicacion);
@@ -79,6 +87,7 @@ export class CrearpublicacionPage implements OnInit {
     }
   }
 
+  // Método para generar un ID único
   generarIdUnico(): string {
     const timestamp = Date.now();
     const random = Math.floor(Math.random() * 1000);

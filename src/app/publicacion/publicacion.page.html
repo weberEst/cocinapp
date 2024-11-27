@@ -6,7 +6,7 @@
       <ion-card>
         <ion-card-content>
           <!-- Imagen de la Publicación -->
-          <img [src]="receta?.strMealThumb" alt="{{ receta?.strMeal || receta.titulo }}" style="width: 100%; height: auto;" /> <!-- Imagen dinámica -->
+          <img [src]="receta?.strMealThumb || receta.imagen" alt="{{ receta?.strMeal || receta.titulo }}" style="width: 100%; height: auto;" /> <!-- Imagen dinámica -->
         </ion-card-content>
       </ion-card>
 
