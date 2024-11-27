@@ -15,6 +15,7 @@ export class BuscadorPage implements OnInit {
   recetasBD: any[] = [];
   busqueda: string = '';
   tipoRecetas: string = 'api'; // Variable para controlar el tipo de recetas a mostrar
+  categoriaSeleccionada: string = ''; // Variable para la categoría seleccionada
 
   constructor(
     private router: Router,
@@ -55,17 +56,27 @@ export class BuscadorPage implements OnInit {
     );
   }
 
-  // Buscar recetas según el término ingresado en el conjunto de datos seleccionado
-  buscarRecetas() {
+  // Filtrar recetas por categoría seleccionada
+  filtrarPorCategoria() {
     const recetasOrigen = this.tipoRecetas === 'api' ? this.recetasAPI : this.recetasBD;
 
-    if (this.busqueda.trim()) {
+    if (this.categoriaSeleccionada.trim()) {
       this.recetas = recetasOrigen.filter((receta) =>
-        (receta.strMeal || receta.titulo).toLowerCase().includes(this.busqueda.toLowerCase()) ||
-        (receta.strCategory || receta.categoria).toLowerCase().includes(this.busqueda.toLowerCase())
+        (receta.strCategory || receta.categoria).toLowerCase() === this.categoriaSeleccionada.toLowerCase()
       );
     } else {
-      this.recetas = recetasOrigen; // Restaurar la lista completa si no hay término de búsqueda
+      this.recetas = recetasOrigen; // Restaurar la lista completa si no hay categoría seleccionada
+    }
+  }
+
+  // Método para buscar recetas según el término ingresado y la categoría seleccionada
+  buscarRecetas() {
+    this.filtrarPorCategoria(); // Filtrar primero por categoría
+
+    if (this.busqueda.trim()) {
+      this.recetas = this.recetas.filter((receta) =>
+        (receta.strMeal || receta.titulo).toLowerCase().includes(this.busqueda.toLowerCase())
+      );
     }
   }
 
