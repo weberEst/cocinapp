@@ -1,8 +1,16 @@
 <app-header [titulo]="'Buscador'" [Direccion]="'/inicio'"></app-header>
 
 <ion-content>
- <!-- Filtro de Categoría -->
- <ion-item>
+
+
+<!-- Barra de Búsqueda -->
+<ion-searchbar
+  placeholder="Buscar"
+  [(ngModel)]="busqueda"
+  (ionInput)="buscarRecetas()"
+></ion-searchbar>
+
+<ion-item>
   <ion-label class="text-center">Seleccionar Categoría</ion-label>
   <ion-select [(ngModel)]="categoriaSeleccionada" (ionChange)="filtrarPorCategoria()">
     <ion-select-option value="">Mostrar todas</ion-select-option> <!-- Opción para ver todas las recetas -->
@@ -21,27 +29,15 @@
     <ion-select-option value="Cocina Vegana">Cocina Vegana</ion-select-option>
     <ion-select-option value="Recetas Festivas">Recetas Festivas</ion-select-option>
   </ion-select>
-</ion-item>
+ </ion-item>
 
-<!-- Barra de Búsqueda -->
-<ion-searchbar
-  placeholder="Buscar"
-  [(ngModel)]="busqueda"
-  (ionInput)="buscarRecetas()"
-></ion-searchbar>
-
-<!-- Botón para cargar recetas de CocinApp -->
-<ion-button expand="full" (click)="cargarRecetasBD()">Ver Recetas ORIGINALES DE COCINAPP</ion-button>
-
-<!-- Botón para cargar recetas genéricas -->
-<ion-button expand="full" (click)="cargarRecetasAPI()">Ver Recetas GENÉRICAS</ion-button>
 
 <ion-list *ngIf="recetas.length > 0">
   <ion-item *ngFor="let receta of recetas" (click)="navigateTo(receta, '/publicacion')">
     <ion-label>
-      <h2>{{ receta.strMeal || receta.titulo }}</h2>
+      <h2>{{ receta.titulo }}</h2>
     </ion-label>
-    <img [src]="receta.strMealThumb || receta.imagen" alt="{{ receta.strMeal || receta.titulo }}" style="width: 50px; height: 50px;" />
+    <img [src]="receta.imagen" alt="{{ receta.titulo }}" style="width: 50px; height: 50px;" />
   </ion-item>
 </ion-list>
 </ion-content>

@@ -5,11 +5,13 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { firstValueFrom } from 'rxjs';
 import firebase from 'firebase/compat/app';
+import { map } from 'rxjs/operators';
 
 interface UserData {
   email: string;
   usuario: string;
   userid: string | null;
+  publicacionesGuardadas: string[];
 }
 
 @Injectable({
@@ -70,6 +72,26 @@ export class FirebaseLoginService {
     } catch (error) {
       console.error('Error al guardar la publicación', error);
     }
+  }
+
+  getPublicacionesGuardadas(uid: string): Promise<string[]> {
+    return this.FireStore.doc<{ publicacionesGuardadas: string[] }>(`users/${uid}`)
+      .get()
+      .toPromise()
+      .then(doc => {
+        if (doc?.exists) {
+          // El documento existe, obtenemos los datos
+          const userData = doc.data();
+          return userData?.publicacionesGuardadas || [];
+        } else {
+          console.log(`El documento del usuario con UID ${uid} no existe.`);
+          return [];
+        }
+      })
+      .catch(error => {
+        console.error('Error obteniendo publicaciones guardadas:', error);
+        return [];
+      });
   }
 
   // Método para probar la conexión a Firestore

@@ -1,12 +1,12 @@
 <ion-app>
-  <app-header [titulo] = "receta?.strMeal  || receta.titulo" [Direccion] = "'/buscador'"></app-header>
+  <app-header [titulo] = "receta.titulo" [Direccion] = "'/buscador'"></app-header>
 
   <ion-content id="main-content">
     <ion-content class="ion-padding">
       <ion-card>
         <ion-card-content>
           <!-- Imagen de la Publicación -->
-          <img [src]="receta?.strMealThumb || receta.imagen" alt="{{ receta?.strMeal || receta.titulo }}" style="width: 100%; height: auto;" /> <!-- Imagen dinámica -->
+          <img [src]="receta.imagen" alt="{{ receta.titulo }}" style="width: 100%; height: auto;" /> <!-- Imagen dinámica -->
         </ion-card-content>
       </ion-card>
 
@@ -30,10 +30,6 @@
            
                 <ul>
                   {{ receta.ingredientes  }}
-                  <li *ngFor="let ingredient of ingredientes">
-                    {{ ingredient }}
-                    
-                  </li>
                 </ul>
         </ion-card-content>
       </ion-card>
@@ -44,25 +40,10 @@
           <ion-card-title>Pasos</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <p>{{ receta?.strInstructions  || receta.pasos }} </p> <!-- Pasos dinámicos -->
+          <p>{{ receta.pasos }} </p> <!-- Pasos dinámicos -->
         </ion-card-content>
       </ion-card>
 
-      <!-- Sección de Video -->
-      <ion-card *ngIf="receta?.strYoutube">
-        <ion-card-header>
-          <ion-card-title>Video</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <iframe
-            [src]="getSafeUrl(receta?.strYoutube)"
-            width="100%"
-            height="300"
-            frameborder="0"
-            allowfullscreen
-          ></iframe>
-        </ion-card-content>
-      </ion-card>
 
       <!-- Botones de Acción -->
       <ion-card>

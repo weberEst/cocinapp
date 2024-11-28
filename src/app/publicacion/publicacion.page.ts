@@ -45,7 +45,6 @@ export class PublicacionPage implements OnInit {
       this.postId = this.receta?.idPublicacion;
       this.imagen = this.receta?.imagen || ''; // Asegúrate de que `imagen` sea el campo que contiene el Base64
       console.log(this.imagen); // Confirmar que se recuperó correctamente
-      this.mostrarIngredientes();
     }
   
     this.firebaseLoginService.getCurrentUser().subscribe(async (user: User | null) => {
@@ -130,17 +129,7 @@ export class PublicacionPage implements OnInit {
       }
     }}
 
-  mostrarIngredientes() {
 
-    this.ingredientes = [];    
-    let i= 1;
-
-    while (this.receta[`strIngredient${i}`]) {
-      const ingredient = this.receta[`strIngredient${i}`];
-      this.ingredientes.push(ingredient || 'No se encontraron ingredientes');
-      i++;    
-    }
-  }
 
 
 

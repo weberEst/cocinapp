@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/servicios/api.service';
 import { FirebaseLoginService } from '../servicios/firebase-login.service';
 import { RecetasBdService } from '../servicios/recetasbd.service'; // Asegúrate de que el nombre y la ruta sean correctos
 
@@ -19,28 +18,16 @@ export class BuscadorPage implements OnInit {
 
   constructor(
     private router: Router,
-    private apiService: ApiService,
     private firebaseLoginService: FirebaseLoginService,
     private recetasBdService: RecetasBdService // Asegúrate de que el nombre del servicio sea correcto
   ) {}
 
   ngOnInit() {
-    this.cargarRecetasAPI(); // Cargar recetas genéricas al iniciar
+    this.cargarRecetasBD(); // Cargar recetas genéricas al iniciar
   }
 
   // Cargar recetas genéricas (API) al iniciar o al presionar el botón
-  cargarRecetasAPI() {
-    this.apiService.obtenerRecetas().subscribe(
-      (data) => {
-        this.recetasAPI = data.meals || [];
-        this.recetas = this.recetasAPI; // Mostrar recetas de la API
-        this.tipoRecetas = 'api';
-      },
-      (error) => {
-        console.error('Error al obtener las recetas de la API', error);
-      }
-    );
-  }
+  
 
   // Cargar recetas desde Firebase
   cargarRecetasBD() {
@@ -62,7 +49,7 @@ export class BuscadorPage implements OnInit {
 
     if (this.categoriaSeleccionada.trim()) {
       this.recetas = recetasOrigen.filter((receta) =>
-        (receta.strCategory || receta.categoria).toLowerCase() === this.categoriaSeleccionada.toLowerCase()
+        (receta.categoria).toLowerCase() === this.categoriaSeleccionada.toLowerCase()
       );
     } else {
       this.recetas = recetasOrigen; // Restaurar la lista completa si no hay categoría seleccionada
@@ -75,7 +62,7 @@ export class BuscadorPage implements OnInit {
 
     if (this.busqueda.trim()) {
       this.recetas = this.recetas.filter((receta) =>
-        (receta.strMeal || receta.titulo).toLowerCase().includes(this.busqueda.toLowerCase())
+        (receta.titulo).toLowerCase().includes(this.busqueda.toLowerCase())
       );
     }
   }

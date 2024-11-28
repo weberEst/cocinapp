@@ -2,6 +2,14 @@
   <app-header [titulo] = "'Guardados'" [Direccion] = "'/inicio'"></app-header>
 
   <ion-content [fullscreen]="true">
+    <ion-list *ngIf="publicacionesGuardadas.length > 0">
+      <ion-item *ngFor="let publicacion of publicacionesGuardadas">
+        <ion-label>
+          <h2>{{ publicacion.titulo }}</h2>
+        </ion-label>
+        <img [src]="publicacion.imagen" alt="{{ publicacion.titulo }}" style="width: 50px; height: 50px;" />
+      </ion-item>
+    </ion-list>
 
   </ion-content>
 
