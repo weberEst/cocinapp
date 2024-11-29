@@ -62,17 +62,21 @@ export class FirebaseLoginService {
   }
 
 
-
   async agregarPublicacionGuardada(uid: string, idPublicacion: string): Promise<void> {
     try {
-      this.FireStore.collection('users').doc(uid).update({
-        publicacionesGuardadas: firebase.firestore.FieldValue.arrayUnion(idPublicacion)})
-      console.log(idPublicacion)
+      // Utilizando firebase.firestore.FieldValue.arrayUnion para agregar el idPublicacion al array
+      await this.FireStore.collection('users').doc(uid).update({
+        publicacionesGuardadas: firebase.firestore.FieldValue.arrayUnion(idPublicacion)
+      });
+  
+      // Confirmación en consola
+      console.log(idPublicacion);
       console.log('Publicación guardada exitosamente');
     } catch (error) {
       console.error('Error al guardar la publicación', error);
     }
   }
+  
 
   getPublicacionesGuardadas(uid: string): Promise<string[]> {
     return this.FireStore.doc<{ publicacionesGuardadas: string[] }>(`users/${uid}`)
