@@ -4,7 +4,7 @@ import { PublicacionPage } from './publicacion.page';
 
 const routes: Routes = [
   {
-    path: ':id', // Ruta dinámica con parámetro ID
+    path: '', 
     component: PublicacionPage,
   },
 ];

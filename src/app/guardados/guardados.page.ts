@@ -50,8 +50,6 @@ export class GuardadosPage implements OnInit {
     });
   }
 
-  // Método para navegar a la página de publicación cuando se hace clic en una receta
-  navigateTo(recetaId: string, path: string) {
-    this.router.navigate([path, recetaId]); // Navegar con el ID de la receta
-  }
+
+
 }
