@@ -45,33 +45,16 @@
       </ion-card>
 
 
-      <!-- Botones de Acción -->
-      <ion-card>
-        <ion-card-content>
-          <ion-button expand="full" color="primary" (click)="Like()">Like</ion-button>
-          <ion-button expand="full" (click)="guardarPublicacion()">Guardar</ion-button>
-        </ion-card-content>
-      </ion-card>
+      <ion-button 
+      expand="full" 
+      [color]="publicacionGuardada ? 'success' : 'primary'" 
+      (click)="guardarPublicacion()">
+      {{ publicacionGuardada ? 'Guardada' : 'Guardar' }}
+    </ion-button>
+    
 
-      <!-- Comentario -->
-      <ion-card style="margin-bottom: 10%;">
-        <ion-card-header>
-          <ion-card-title>Comentario</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item>
-            <ion-input
-              [(ngModel)]="comentario"
-              name="comentario"
-              placeholder="Escribe tu comentario"
-              required
-            ></ion-input>
-          </ion-item>
-          <ion-button expand="full" color="primary" (click)="Comentar()">
-            Enviar Comentario
-          </ion-button>
-        </ion-card-content>
-      </ion-card>
+
+
     </ion-content>
   </ion-content>
 </ion-app>
