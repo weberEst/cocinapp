@@ -1,17 +1,15 @@
 <app-header [titulo]="'Publicaciones Guardadas'" [Direccion]="'/inicio'"></app-header>
 <ion-content>
   <ion-list>
-    <!-- Iterar sobre las publicaciones guardadas -->
-    <ion-item *ngFor="let publicacion of publicacionesDetalles">
-      <!-- Mostrar los detalles de cada publicación -->
+    <ion-item *ngFor="let publicacion of publicacionesGuardadas" (click)="navigateTo(publicacion.idPublicacion, '/publicacion')">
+      <ion-thumbnail slot="start">
+        <img [src]="publicacion.imagen" alt="Imagen de la publicación" />
+      </ion-thumbnail>
       <ion-label>
-        <h2>{{ publicacion?.titulo }}</h2>
-        <p>{{ publicacion?.descripcion }}</p>
-        <img *ngIf="publicacion?.imagenUrl" [src]="publicacion?.imagenUrl" alt="Imagen de la publicación"/>
+        <h2>{{ publicacion.titulo }}</h2>
+        <p>{{ publicacion.categoria }}</p>
       </ion-label>
-
-      <!-- Otras opciones o botones para interactuar con cada publicación -->
-      <ion-button (click)="navigateTo(publicacion.id, '/ruta-a-publicacion')">Ver más</ion-button>
     </ion-item>
   </ion-list>
+  
 </ion-content>
