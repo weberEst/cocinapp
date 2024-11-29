@@ -1,16 +1,20 @@
-<ion-app>
-  <app-header [titulo] = "'Guardados'" [Direccion] = "'/inicio'"></app-header>
+<app-header [titulo]="'Publicaciones Guardadas'" [Direccion]="'/inicio'"></app-header>
 
-  <ion-content [fullscreen]="true">
-    <ion-list *ngIf="publicacionesGuardadas.length > 0">
-      <ion-item *ngFor="let publicacion of publicacionesGuardadas">
-        <ion-label>
-          <h2>{{ publicacion.titulo }}</h2>
-        </ion-label>
-        <img [src]="publicacion.imagen" alt="{{ publicacion.titulo }}" style="width: 50px; height: 50px;" />
-      </ion-item>
-    </ion-list>
+<ion-content>
+  <!-- Lista de Recetas Guardadas -->
 
-  </ion-content>
-
-</ion-app>
+  
+  <ion-list *ngIf="publicacionesGuardadas.length > 0">
+    <ion-item *ngFor="let recetaId of publicacionesGuardadas" (click)="navigateTo(recetaId, '/publicacion')">
+      <ion-label>
+        <h2>Receta {{ recetaId }}</h2> <!-- Aquí puedes reemplazar con el título o detalles de la receta -->
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  
+  <!-- Mensaje si no hay publicaciones guardadas -->
+  <div *ngIf="publicacionesGuardadas.length === 0">
+    <p>No tienes publicaciones guardadas.</p>
+  </div>
+  
+</ion-content>

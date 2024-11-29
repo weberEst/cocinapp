@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FirebaseLoginService } from '../servicios/firebase-login.service';
 import { RecetasBdService } from '../servicios/recetasbd.service';
+import { User } from 'firebase/auth'; // Importar User de Firebase
 
 @Component({
   selector: 'app-guardados',
@@ -9,39 +11,44 @@ import { RecetasBdService } from '../servicios/recetasbd.service';
 })
 export class GuardadosPage implements OnInit {
 
-  uid: string =''; // UID del usuario autenticado
-  publicacionesGuardadas: any[] = [];
-  recetasBD: any[] = [];
-
+  nombre: string = ''; // Variable para el nombre del usuario
+  correo: string = ''; // Variable para el correo del usuario
+  publicacionesGuardadas: any[] = []; // Array para almacenar las publicaciones guardadas
 
   constructor(
+    private router: Router,
     private firebaseLoginService: FirebaseLoginService,
-    private recetasBdService: RecetasBdService
-  ) { }
+    private recetasBdService: RecetasBdService // Serviría para obtener más datos de recetas
+  ) {}
 
   async ngOnInit() {
-    try {
-      // Obtener los IDs de las publicaciones guardadas por el usuario
-      const idsGuardados = await this.firebaseLoginService.getPublicacionesGuardadas(this.uid);
-      
-      if (idsGuardados.length > 0) {
-        // Obtener todas las recetas de la BD
-        this.recetasBdService.getRecetasBD().subscribe(
-          (recetas) => {
-            // Filtrar las recetas que están en el array de publicaciones guardadas
-            this.recetasBD = recetas.filter(receta => idsGuardados.includes(receta.id as string));
-            this.publicacionesGuardadas = this.recetasBD;  // Asignar las recetas filtradas
-          },
-          (error) => {
-            console.error('Error al obtener recetas de la BD', error);
-          }
-        );
+    // Obtener el usuario actual desde Firebase Authentication
+    this.firebaseLoginService.getCurrentUser().subscribe(async (user: User | null) => { 
+      if (user) {
+        // Usa el UID del usuario autenticado para obtener más datos
+        const uid = user.uid;
+
+        // Obtener los datos del usuario desde Firestore
+        const usuarioDoc = await this.firebaseLoginService.getUserData(uid);
+        if (usuarioDoc.exists) {
+          const userData = usuarioDoc.data();
+          this.nombre = userData?.usuario || 'Usuario'; // Asignar el nombre del usuario
+          this.correo = userData?.email || 'Email'; // Asignar el correo del usuario
+          
+          // Obtener las publicaciones guardadas del usuario
+          const publicaciones = userData?.publicacionesGuardadas || []; // Array de publicaciones guardadas
+          this.publicacionesGuardadas = publicaciones; // Asignar las publicaciones guardadas al array
+        } else {
+          this.nombre = 'Usuario no encontrado';
+        }
       } else {
-        console.log('No hay recetas guardadas.');
+        this.nombre = 'No estás logueado';
       }
-    } catch (error) {
-      console.error('Error obteniendo publicaciones guardadas:', error);
-    }
+    });
   }
 
+  // Método para navegar a la página de publicación cuando se hace clic en una receta
+  navigateTo(recetaId: string, path: string) {
+    this.router.navigate([path, recetaId]); // Navegar con el ID de la receta
+  }
 }
