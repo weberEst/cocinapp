@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false, 
-  firebaseConfig:{
+  FirebaseConfig:{
     apiKey:"AIzaSyBCwh1i9WlcpmGZG_1ski6nfdTZfNidDSI",
     authDomain:"cocinapp-8d12d.firebaseapp.com",
     projectId:"cocinapp-8d12d",
